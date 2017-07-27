@@ -8,7 +8,6 @@ class Triangle(FractalStructure):
 
     def __init__(self, width, height):
         super(Triangle, self).__init__(width, height)
-        self.points = []
 
     def gen_points(self, random=False):
         self.points = []

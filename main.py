@@ -3,11 +3,13 @@ import pygame
 from pygame.locals import *
 from walker import Walker
 from structures.triangle import Triangle
+from structures.square import Square
+from structures.picture import Picture
 
 
 W, H = (800, 600)
 
-structure = Triangle
+structure = Picture
 walker = Walker(W, H, structure)
 
 def update(surface, walker):
@@ -15,20 +17,26 @@ def update(surface, walker):
     walker.walk()
 
 def draw(surface, point):
-    pygame.draw.circle(surface, (0,0,0), point, 2)
+    pygame.draw.circle(surface, (255,255,255), point, 1, 1)
 
 def main():
     pygame.init()
     surface = pygame.display.set_mode((W, H))
-    surface.fill((255,255,255))
+    surface.fill((0))
     running = True
+    iters = 0
     while running:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
+                running = False
                 break
-        update(surface, walker)
-        pygame.display.update()
+        if running:
+            update(surface, walker)
+            if iters > 20000:
+                pygame.display.update()
+                iters = 0
+        iters += 1
 
 
 
